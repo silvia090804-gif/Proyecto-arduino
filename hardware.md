@@ -5,4 +5,98 @@ Lista de Hardware:
 1 Protoboard
 1 Arduino UNO R3
 Cable USB 
+
+Esquema Circuito
 <img width="603" height="461" alt="image" src="https://github.com/user-attachments/assets/26a2a0fe-bd3d-439a-91f7-6efc2aa36df3" />
+
+
+Código Circuito 
+
+// C++ code
+//
+  int led1 = 12;
+  int led2 = 11;
+  int led3 = 10;
+  int led4 = 9;
+  int led5 = 8;
+  int leds[5] = {0,0,0,0,0};
+  int velocidad = 1000;
+  int velocidadstart = 1000;
+  int resta = 100;
+
+void setup()
+{
+
+  pinMode (2, INPUT_PULLUP );
+  pinMode (3, INPUT_PULLUP );
+  attachInterrupt(digitalPinToInterrupt(2), cambiarVelDer, CHANGE );
+  attachInterrupt(digitalPinToInterrupt(3), cambiarVelIzq, CHANGE );
+  pinMode (led1, OUTPUT);
+  pinMode (led2, OUTPUT);
+  pinMode (led3, OUTPUT);
+  pinMode (led4, OUTPUT);
+  pinMode (led5, OUTPUT);
+  Serial.begin(9600);
+ 
+}
+
+void loop()
+{
+  encenderLED(1,velocidad);
+  encenderLED(2,velocidad);
+  encenderLED(3,velocidad);
+  encenderLED(4,velocidad);
+  encenderLED(5,velocidad);
+  encenderLED(4,velocidad);
+  encenderLED(3,velocidad);
+  encenderLED(2,velocidad);
+  encenderLED(1,velocidad);
+}
+
+void encenderLED(int led, int velocidad){
+  
+  Serial.print(led);
+  Serial.print(" --- ");
+  Serial.println(velocidad);
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, LOW);
+  leds[led-1] = 1;
+  switch(led){
+    case 1:
+    digitalWrite (led1, HIGH);
+    break;
+    case 2:
+    digitalWrite (led2, HIGH);
+    break;
+    case 3:
+    digitalWrite (led3, HIGH);
+    break;
+    case 4:
+    digitalWrite (led4, HIGH);
+    break;
+    case 5:
+    digitalWrite (led5, HIGH);
+    break;
+       
+  }
+  delay(velocidad);
+  leds[led-1] = 0;
+  
+}
+void cambiarVelDer() {
+  if(leds[0] == 1 || leds[4] == 1){
+    velocidad = velocidad - resta;
+  }else{
+    velocidad = velocidadstart;
+  }
+}
+void cambiarVelIzq() {
+  if(leds[0] == 1 || leds[4] == 1){
+    velocidad = velocidad - resta;
+  }else{
+    velocidad = velocidadstart;
+  }
+}
