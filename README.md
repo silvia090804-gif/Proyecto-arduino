@@ -53,6 +53,13 @@ Añadir un Buzzer
 SPRINT 2
 Dia 5 - 25 noviembre
 entrega sprint 1
+revisión memoria del Github
+
+Dia 6 - 2 Diciembre
+Investigación y búsqueda autónoma acerca de los Buzzers.
+Implementacion del Buzzer a nuestro circuito.
+Comprobación del funcionamineto del Buzzer cuando el jugador falla.
+
 
 
 
