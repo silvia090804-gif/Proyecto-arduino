@@ -60,9 +60,15 @@ Investigación y búsqueda autónoma acerca de los Buzzers.
 Implementacion del Buzzer a nuestro circuito.
 Comprobación del funcionamineto del Buzzer cuando el jugador falla.
 
+Dia 7 - 4 Diciembre
+Corrección de error en el buzzer
+  El buzzer sonaba nada más empezar el programa.
+  Solución: Se cambió el modo de interrupción de `CHANGE` a `FALLING`.
 
 
-
-
-
+Dia 8 - 9 Diciembre
+Corrección de bug en los LEDs y mejora de estabilidad
+  Los LEDs a veces se quedaban bloqueados.
+  Solución: La variable `velocidad` se declaró como `volatile`.
+  Mejora añadida: Se establecieron límites para la velocidad mínima para evitar valores negativos.
 Implementación del código final funcional.
