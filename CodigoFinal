@@ -1,0 +1,99 @@
+int led1 = 12;
+int led2 = 11;
+int led3 = 10;
+int led4 = 9;
+int led5 = 8;
+
+volatile int leds[5] = {0, 0, 0, 0, 0};
+
+volatile int velocidad = 1000;
+int velocidadstart = 1000;
+int resta = 100;
+
+void setup()
+{
+  pinMode(2, INPUT_PULLUP);
+  pinMode(3, INPUT_PULLUP);
+
+  attachInterrupt(digitalPinToInterrupt(2), cambiarVelDer, FALLING);
+  attachInterrupt(digitalPinToInterrupt(3), cambiarVelIzq, FALLING);
+
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
+  pinMode(led5, OUTPUT);
+
+  pinMode(7, OUTPUT);   //Buzzer bien declarado
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  encenderLED(1);
+  encenderLED(2);
+  encenderLED(3);
+  encenderLED(4);
+  encenderLED(5);
+  encenderLED(4);
+  encenderLED(3);
+  encenderLED(2);
+  encenderLED(1);
+}
+
+void encenderLED(int led)
+{
+  Serial.print(led);
+  Serial.print(" --- ");
+  Serial.println(velocidad);
+
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+  digitalWrite(led4, LOW);
+  digitalWrite(led5, LOW);
+
+  leds[led - 1] = 1;
+
+  switch (led)
+  {
+    case 1: digitalWrite(led1, HIGH); break;
+    case 2: digitalWrite(led2, HIGH); break;
+    case 3: digitalWrite(led3, HIGH); break;
+    case 4: digitalWrite(led4, HIGH); break;
+    case 5: digitalWrite(led5, HIGH); break;
+  }
+
+  delay(velocidad);
+
+  leds[led - 1] = 0;
+}
+
+void cambiarVelDer()
+{
+  if (leds[0] == 1 || leds[4] == 1)
+  {
+    velocidad -= resta;
+    if (velocidad < 100) velocidad = 100;   //Límite mínimo
+  }
+  else
+  {
+    velocidad = velocidadstart;
+    tone(7, 1000, 100);
+  }
+}
+
+void cambiarVelIzq()
+{
+  if (leds[0] == 1 || leds[4] == 1)
+  {
+    velocidad -= resta;
+    if (velocidad < 100) velocidad = 100;   //Límite mínimo
+  }
+  else
+  {
+    velocidad = velocidadstart;
+    tone(7, 1000, 100);
+  }
+}
