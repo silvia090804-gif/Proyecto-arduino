@@ -6,6 +6,8 @@ int led5 = 8;
 
 volatile int leds[5] = {0, 0, 0, 0, 0};
 
+volatile bool puedeCambiar = true;
+
 volatile int velocidad = 1000;
 int velocidadstart = 1000;
 int resta = 100;
@@ -68,10 +70,15 @@ void encenderLED(int led)
   delay(velocidad);
 
   leds[led - 1] = 0;
+
+  puedeCambiar = true;
 }
 
 void cambiarVelDer()
 {
+  if (!puedeCambiar) return;
+  puedeCambiar = false; 
+
   if (leds[4] == 1)
   {
     velocidad -= resta;
@@ -86,6 +93,8 @@ void cambiarVelDer()
 
 void cambiarVelIzq()
 {
+   if (!puedeCambiar) return;
+  puedeCambiar = false; 
   if (leds[0] == 1)
   {
     velocidad -= resta;
