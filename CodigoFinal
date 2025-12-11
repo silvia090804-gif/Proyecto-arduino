@@ -24,7 +24,7 @@ void setup()
   pinMode(led4, OUTPUT);
   pinMode(led5, OUTPUT);
 
-  pinMode(7, OUTPUT);   //Buzzer bien declarado
+  pinMode(7, OUTPUT);   //Buzzer 
 
   Serial.begin(9600);
 }
@@ -39,7 +39,7 @@ void loop()
   encenderLED(4);
   encenderLED(3);
   encenderLED(2);
-  encenderLED(1);
+  
 }
 
 void encenderLED(int led)
@@ -72,7 +72,7 @@ void encenderLED(int led)
 
 void cambiarVelDer()
 {
-  if (leds[0] == 1 || leds[4] == 1)
+  if (leds[4] == 1)
   {
     velocidad -= resta;
     if (velocidad < 100) velocidad = 100;   //Límite mínimo
@@ -86,7 +86,7 @@ void cambiarVelDer()
 
 void cambiarVelIzq()
 {
-  if (leds[0] == 1 || leds[4] == 1)
+  if (leds[0] == 1)
   {
     velocidad -= resta;
     if (velocidad < 100) velocidad = 100;   //Límite mínimo
